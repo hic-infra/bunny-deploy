@@ -1,0 +1,35 @@
+---
+
+# `endpoints` is an array of `{name, secret}`.
+#   `name`   - referenced by a collection connection.
+#   `secret` - an already deployed secret containing:
+#     `address`  - the http(s) endpoint for the task api
+#     `username` - endpoint username
+#     `password` - endpoint password
+
+endpoints:
+  - name: example
+    secret: example-gateway
+
+# `bunnies` is an array of {name, data, connections} where
+#   `name` - a descriptive name for the collection
+#   `data` - a map of
+#     `source_db`   - the omop database name
+#     `suppression` - the low count threshold (int)
+#     `rounding`    - count rounding target
+#   `connections` - an array of {collectio_id, endpoint} where
+#     `collection_id` - the RQuest collection ID
+#     `endpoint`      - name of the endpoint (defined above)
+#                       must be unique for `connections`
+#     `debug`         - optional, defaults to INFO
+
+bunnies:
+  - name: sample_omop
+    data:
+      source_db: sample_omop
+      suppression: 10
+      rounding: 10
+    connections:
+      - collection_id: RQ-CC-01234567-89ab-cdef-0123-456789abcdef
+        endpoint: example
+        debug: DEBUG
