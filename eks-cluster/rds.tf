@@ -46,7 +46,7 @@ resource "aws_rds_cluster" "bunny" {
   master_username = "bunny"
   master_password = random_password.rds_password.result
 
-  engine_version = "15.10"
+  engine_version = "15.12"
 
   vpc_security_group_ids = [
     aws_security_group.bunny_rds.id

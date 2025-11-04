@@ -44,5 +44,5 @@ variable "bunnies_yaml" {
 variable "image" {
   type        = string
   description = "tagged bunny container release"
-  default     = "ghcr.io/health-informatics-uon/hutch/bunny:1.1.0"
+  default     = "ghcr.io/health-informatics-uon/hutch/bunny:1.4.1"
 }
