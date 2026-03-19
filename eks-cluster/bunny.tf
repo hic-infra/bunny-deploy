@@ -10,6 +10,7 @@ locals {
       data          = bunny.data
       collection_id = connection.collection_id
       endpoint      = connection.endpoint
+      bunny_image   = lookup(connection, "bunny_image", local.image)
       debug         = lookup(connection, "debug", "INFO")
     }
     ]
@@ -84,7 +85,7 @@ resource "kubernetes_deployment_v1" "bunny" {
       spec {
         container {
           name  = "availabunny"
-          image = local.image
+          image = each.value.bunny_image
 
           env {
             name  = "TASK_API_TYPE"
@@ -160,7 +161,7 @@ resource "kubernetes_deployment_v1" "bunny" {
 
         container {
           name  = "distribunny"
-          image = local.image
+          image = each.value.bunny_image
 
           env {
             name  = "TASK_API_TYPE"
